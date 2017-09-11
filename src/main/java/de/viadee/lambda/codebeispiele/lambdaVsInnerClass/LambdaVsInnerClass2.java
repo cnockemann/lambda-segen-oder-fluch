@@ -52,6 +52,9 @@ public class LambdaVsInnerClass2 {
 		
 		// @formatter:off
 		// ByteCode dazu
+		//		new           #84                 // class de/viadee/lambda/codebeispiele/sprachAenderungen/LambdaVsInnerClass2$1InnerClass
+	    // 		dup
+	    //		bipush        10
 		//		invokestatic  #18                 // Method java/lang/Integer.valueOf:(I)Ljava/lang/Integer;
 		//		invokespecial #86                 // Method de/viadee/lambda/codebeispiele/sprachAenderungen/LambdaVsInnerClass2$1InnerClass."<init>":(Ljava/lang/Integer;)V
 		//		invokeinterface #32,  2           // InterfaceMethod java/util/stream/Stream.filter:(Ljava/util/function/Predicate;)Ljava/util/stream/Stream;

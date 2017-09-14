@@ -1,4 +1,4 @@
-package de.viadee.lambda.codebeispiele.lambdaVsInnerClass;
+package de.viadee.lambda.codebeispiele.lambdavsinnerclass;
 
 import java.util.stream.Collectors;
 import java.util.stream.Stream;

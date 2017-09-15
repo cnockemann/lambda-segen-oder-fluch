@@ -1,4 +1,4 @@
-package de.viadee.lambda.codebeispiele.lambdavsinnerclass;
+package de.viadee.lambda.codeexamples.lambdavsinnerclass;
 
 import java.util.function.Predicate;
 import java.util.function.UnaryOperator;

@@ -1,4 +1,4 @@
-package de.viadee.lambda.codebeispiele;
+package de.viadee.lambda.codeexamples;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

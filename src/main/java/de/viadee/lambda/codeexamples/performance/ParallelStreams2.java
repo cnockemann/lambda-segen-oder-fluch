@@ -3,7 +3,7 @@ package de.viadee.lambda.codeexamples.performance;
 import java.util.function.Consumer;
 import java.util.stream.Stream;
 
-public class ParallelStreams {
+public class ParallelStreams2 {
 
 	public static void main(String[] args) throws InterruptedException {
 

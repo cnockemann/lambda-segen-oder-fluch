@@ -12,7 +12,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class QueryCollections1 {
-	
+
 	protected Album nevermind;
 	protected Album metallica;
 	protected Album numberOfTheBeast;
@@ -48,38 +48,28 @@ public class QueryCollections1 {
 		numberOfTheBeast.setTracks(Arrays.asList(invaders, children));
 
 		albums = Arrays.asList(nevermind, metallica, numberOfTheBeast);
-		tracks = Arrays.asList(smells, bloom, come, sandman, sad, holier,
-				invaders, children);
+		tracks = Arrays.asList(smells, bloom, come, sandman, sad, holier, invaders, children);
 	}
-
 
 	@Test
 	public void testGroupAlbumTracksByNumber() {
 		// Group album tracks by number
-		Map<Integer, List<Track>> tracksByNumber = albums.stream()
-				.flatMap(album -> album.getTracks().stream())
-				.collect(Collectors.toList()).stream().collect(
-				Collectors.groupingBy(Track::getNumber));
+		Map<Integer, List<Track>> tracksByNumber = albums.stream().flatMap(album -> album.getTracks().stream())
+				.collect(Collectors.groupingBy(Track::getNumber));
 		assertTracksByNumber(tracksByNumber);
 	}
-
 
 	protected void assertTracksByNumber(Map<Integer, List<Track>> tracksByNumber) {
 		// Number 1
 		assertEquals(3, tracksByNumber.get(1).size());
-		assertTrue(tracksByNumber.get(1).containsAll(
-				Arrays.asList(smells, sandman, invaders)));
+		assertTrue(tracksByNumber.get(1).containsAll(Arrays.asList(smells, sandman, invaders)));
 		// Number 2
 		assertEquals(3, tracksByNumber.get(2).size());
-		assertTrue(tracksByNumber.get(2).containsAll(
-				Arrays.asList(bloom, sad, children)));
+		assertTrue(tracksByNumber.get(2).containsAll(Arrays.asList(bloom, sad, children)));
 		// Number 3
 		assertEquals(2, tracksByNumber.get(3).size());
-		assertTrue(tracksByNumber.get(3).containsAll(
-				Arrays.asList(come, holier)));
+		assertTrue(tracksByNumber.get(3).containsAll(Arrays.asList(come, holier)));
 	}
-
-	
 
 	protected class Album {
 		public String getName() {
@@ -121,7 +111,5 @@ public class QueryCollections1 {
 		}
 
 	}
-
-
 
 }

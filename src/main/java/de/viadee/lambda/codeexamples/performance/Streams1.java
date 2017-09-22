@@ -32,7 +32,7 @@ public class Streams1 {
 		System.out.println("Runtime IntStream: " + (endIntStream - startIntStream) + "ms");
 	}
 
-	private static int forEachLoopMaxInteger(List<Integer> ints) {
+	private static int maxForEach(List<Integer> ints) {
 		int max = Integer.MIN_VALUE;
 		for (Integer n : ints) {
 			max = Integer.max(max, n);
@@ -40,29 +40,29 @@ public class Streams1 {
 		return max;
 	}
 
-	private static int lambdaMaxInteger(List<Integer> ints) {
+	private static int maxStream(List<Integer> ints) {
 		return ints.stream().reduce(Integer::max).get();
 	}
 
-	private static int lambdaMaxIntStream(int[] intArray) {
+	private static int maxntStream(int[] intArray) {
 		return Arrays.stream(intArray).max().getAsInt();
 	}
 
 	private static void repeatIntStream(int[] intArray, int times) {
 		for (int i = 0; i <= times; i++) {
-			lambdaMaxIntStream(intArray);
+			maxntStream(intArray);
 		}
 	}
 
 	private static void repeatForEach(List<Integer> ints, int times) {
 		for (int i = 0; i <= times; i++) {
-			forEachLoopMaxInteger(ints);
+			maxForEach(ints);
 		}
 	}
 
 	private static void repeatStream(List<Integer> ints, int times) {
 		for (int i = 0; i <= times; i++) {
-			lambdaMaxInteger(ints);
+			maxStream(ints);
 		}
 	}
 

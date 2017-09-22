@@ -3,6 +3,7 @@ package de.viadee.lambda.codeexamples.performance;
 import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class Streams {
 
@@ -18,9 +19,17 @@ public class Streams {
 		long startStream = System.currentTimeMillis();
 		repeatStream(ints, 1000);
 		long endStream = System.currentTimeMillis();
+		
+		IntStream intsPrim = new Random()
+				.ints(100000, 0, Integer.MAX_VALUE);
+		long startIntStream = System.currentTimeMillis();
+		repeatIntStream(intsPrim, 1000);
+		long endIntStream = System.currentTimeMillis();
+		
 
 		System.out.println("Runtime ForEach: " + (endForEach - startForEach) + "ms");
 		System.out.println("Runtime Stream: " + (endStream - startStream) + "ms");
+		System.out.println("Runtime IntStream: " + (endIntStream - startIntStream) + "ms");
 	}
 
 	private static int forEachLoopMaxInteger(List<Integer> ints) {
@@ -35,6 +44,16 @@ public class Streams {
 		return ints.stream().reduce(Integer.MIN_VALUE, (a, b) -> Integer.max(a, b));
 	}
 
+	private static int lambdaMaxIntStream(IntStream ints) {
+		return ints.max().getAsInt();
+	}
+
+	private static void repeatIntStream(IntStream ints, int times) {
+		for (int i = 0; i <= times; i++) {
+			lambdaMaxIntStream(ints);
+		}
+	}
+	
 	private static void repeatForEach(List<Integer> ints, int times) {
 		for (int i = 0; i <= times; i++) {
 			forEachLoopMaxInteger(ints);

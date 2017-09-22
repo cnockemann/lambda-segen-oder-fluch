@@ -49,7 +49,7 @@ public class Streams2 {
 	private static Integer findEsForEach(String[] stringArray) {
 		Integer count = 0;
 		for (String string : stringArray) {
-			count = count + string.length();
+			count = Integer.sum(count, string.length());
 		}
 		return count;
 

@@ -44,13 +44,13 @@ public class Streams1 {
 		return ints.stream().reduce(Integer::max).get();
 	}
 
-	private static int maxntStream(int[] intArray) {
+	private static int maxIntStream(int[] intArray) {
 		return Arrays.stream(intArray).max().getAsInt();
 	}
 
 	private static void repeatIntStream(int[] intArray, int times) {
 		for (int i = 0; i <= times; i++) {
-			maxntStream(intArray);
+			maxIntStream(intArray);
 		}
 	}
 

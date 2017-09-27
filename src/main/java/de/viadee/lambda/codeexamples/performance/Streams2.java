@@ -1,58 +1,69 @@
 package de.viadee.lambda.codeexamples.performance;
 
 import java.util.Arrays;
-import java.util.stream.Stream;
+import java.util.List;
+import java.util.Random;
+import java.util.stream.Collectors;
 
 public class Streams2 {
 
 	public static void main(String[] args) {
-		String[] stringArray = Stream.generate(
-				() -> {
-					return "Lorem ipsum dolor sit amet";
-				})
-				.limit(1000)
-				.toArray(String[]::new);
+		List<Integer> ints = new Random()
+				.ints(100000, 0, Integer.MAX_VALUE)
+				.boxed()
+				.collect(Collectors.toList());
 
 		long startForEach = System.currentTimeMillis();
-		repeatForEach(stringArray, 100000);
+		repeatForEach(ints, 1000);
 		long endForEach = System.currentTimeMillis();
 
 		long startStream = System.currentTimeMillis();
-		repeatStream(stringArray, 100000);
+		repeatStream(ints, 1000);
 		long endStream = System.currentTimeMillis();
 
+		int[] intArray = new Random()
+				.ints(100000, 0, Integer.MAX_VALUE).toArray();
+		long startIntStream = System.currentTimeMillis();
+		repeatIntStream(intArray, 1000);
+		long endIntStream = System.currentTimeMillis();
+
 		System.out.println("Runtime ForEach: " + (endForEach - startForEach) + "ms");
-		System.out.println("Runtime Stream: " + (endStream - startStream) +
-				"ms");
+		System.out.println("Runtime Stream: " + (endStream - startStream) + "ms");
+		System.out.println("Runtime IntStream: " + (endIntStream - startIntStream) + "ms");
 	}
 
-	private static void repeatStream(String[] stringArray, int times) {
+	private static int maxForEach(List<Integer> ints) {
+		int max = Integer.MIN_VALUE;
+		for (Integer n : ints) {
+			max = Integer.max(max, n);
+		}
+		return max;
+	}
+
+	private static int maxStream(List<Integer> ints) {
+		return ints.stream().reduce(Integer::max).get();
+	}
+
+	private static int maxIntStream(int[] intArray) {
+		return Arrays.stream(intArray).max().getAsInt();
+	}
+
+	private static void repeatIntStream(int[] intArray, int times) {
 		for (int i = 0; i <= times; i++) {
-			findEsStream(stringArray);
+			maxIntStream(intArray);
 		}
 	}
 
-	private static Integer findEsStream(String[] stringArray) {
-		Integer count = Arrays.stream(stringArray)
-				.map(String::length)
-				.reduce(Integer::sum).get();
-		return count;
-	}
-
-	private static void repeatForEach(String[] stringArray, int times) {
+	private static void repeatForEach(List<Integer> ints, int times) {
 		for (int i = 0; i <= times; i++) {
-			findEsForEach(stringArray);
+			maxForEach(ints);
 		}
-
 	}
 
-	private static Integer findEsForEach(String[] stringArray) {
-		Integer count = 0;
-		for (String string : stringArray) {
-			count = Integer.sum(count, string.length());
+	private static void repeatStream(List<Integer> ints, int times) {
+		for (int i = 0; i <= times; i++) {
+			maxStream(ints);
 		}
-		return count;
-
 	}
 
 }
